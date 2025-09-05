@@ -35,14 +35,17 @@ def setup_logging() -> None:
         root_logger.addHandler(console_handler)
 
 
-def setup_telemetry() -> Tuple[Tracer, TracerProvider]:
+def setup_telemetry(
+    service_name: str = settings.OTEL_SERVICE_NAME,
+    service_version: str = settings.APP_VERSION,
+) -> Tuple[Tracer, TracerProvider]:
     """Initialize OpenTelemetry for HyperDX"""
     setup_logging()
 
     resource = Resource.create(
         {
-            "service.name": settings.OTEL_SERVICE_NAME,
-            "service.version": settings.APP_VERSION,
+            "service.name": service_name,
+            "service.version": service_version,
         }
     )
 

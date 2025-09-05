@@ -11,7 +11,7 @@ from app.core.exceptions import APIException
 from app.core.logger import get_logger
 
 logger = get_logger(__name__)
-router = APIRouter(prefix="/health", tags=["Health"])
+router = APIRouter(prefix="/health", tags=["health"])
 
 
 @router.get("/readiness", status_code=status.HTTP_200_OK)

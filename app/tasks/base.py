@@ -14,10 +14,8 @@ class BaseTaskWithDatabaseContext(Task):
             with get_db_context() as db:
                 self.db = db
                 result = super().__call__(*args, **kwargs)
-                # Force garbage collection after each task
                 gc.collect()
                 return result
         except Exception:
-            # Ensure cleanup even on error
             gc.collect()
             raise
