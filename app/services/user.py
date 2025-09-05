@@ -291,18 +291,6 @@ class UserService(
 
         return None
 
-    @tracer.start_as_current_span("deactivate_user")
-    async def deactivate_user(self, user_id: uuid.UUID) -> bool:
-        """Deactivate user account"""
-        logger.info(f"Deactivating user: {user_id}", operation="deactivate_user")
-        return bool(self.repository.update(user_id, {"is_active": False}))
-
-    @tracer.start_as_current_span("activate_user")
-    async def activate_user(self, user_id: uuid.UUID) -> bool:
-        """Activate user account"""
-        logger.info(f"Activating user: {user_id}", operation="activate_user")
-        return bool(self.repository.update(user_id, {"is_active": True}))
-
     @tracer.start_as_current_span("get_by_id")
     async def get_by_id(self, id: uuid.UUID) -> Optional[UserResponseSchema]:
         """Override to add display_name"""
