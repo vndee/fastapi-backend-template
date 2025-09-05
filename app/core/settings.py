@@ -38,6 +38,7 @@ class Settings(BaseSettings):
     DB_POOL_RECYCLE: int = 3600
     DB_POOL_TIMEOUT: int = 30
     DB_CONNECT_TIMEOUT: int = 10
+    DB_POOL_PRE_PING: bool = False
 
     # Redis
     REDIS_URL: str = "redis://redis:6379"
