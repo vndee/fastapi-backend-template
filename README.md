@@ -66,6 +66,12 @@ fastapi-backend-template/
 │   ├── schemas/         # Pydantic models
 │   ├── services/        # Business logic layer
 │   └── tasks/           # Celery tasks
+├── scripts/             # Utility scripts and automation
+├── tests/               # Test suite
+│   ├── conftest.py      # Test configuration and fixtures
+│   ├── unit/            # Unit tests
+│   ├── integration/     # Integration tests
+│   └── api/             # API endpoint tests
 ├── alembic.ini          # Alembic configuration
 ├── Makefile             # Development commands
 ├── pyproject.toml       # Project dependencies
@@ -240,7 +246,6 @@ make docker-run
 
 - Set `ENVIRONMENT=production` in your environment
 - Use a reverse proxy (nginx) for SSL termination
-- Configure proper database connection pooling
 - Set up log aggregation and monitoring
 - Configure OpenTelemetry exports to your observability platform
 

@@ -28,17 +28,17 @@ def _get_engine_config() -> dict[str, Any]:
             }
         )
     else:
+        pool_config = settings.database_pool_config
         config.update(
             {
                 "poolclass": QueuePool,
-                "pool_size": settings.DB_POOL_SIZE,
-                "max_overflow": settings.DB_MAX_OVERFLOW,
-                "pool_pre_ping": True,
-                "pool_recycle": settings.DB_POOL_RECYCLE,
-                "pool_timeout": settings.DB_POOL_TIMEOUT,
+                **pool_config,
                 "connect_args": {
                     "connect_timeout": settings.DB_CONNECT_TIMEOUT,
-                    "application_name": settings.APP_NAME,
+                    "server_settings": {
+                        "application_name": settings.APP_NAME,
+                        "jit": "off",  # Disable JIT for simple queries
+                    },
                 },
             }
         )

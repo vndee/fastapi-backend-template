@@ -55,5 +55,33 @@ class Settings(BaseSettings):
     OTEL_EXPORTER_OTLP_PROTOCOL: str = "grpc"
     OTEL_EXPORTER_OTLP_HEADERS: str = "authorization=Bearer <your-token>"
 
+    @property
+    def database_pool_config(self) -> dict:
+        """Get environment-specific database connection pool configuration."""
+        if self.ENVIRONMENT == "production":
+            return {
+                "pool_size": 20,
+                "max_overflow": 30,
+                "pool_recycle": 3600,
+                "pool_timeout": 30,
+                "pool_pre_ping": True,
+            }
+        elif self.ENVIRONMENT == "staging":
+            return {
+                "pool_size": 10,
+                "max_overflow": 15,
+                "pool_recycle": 1800,
+                "pool_timeout": 20,
+                "pool_pre_ping": True,
+            }
+        else:  # development
+            return {
+                "pool_size": self.DB_POOL_SIZE,
+                "max_overflow": self.DB_MAX_OVERFLOW,
+                "pool_recycle": self.DB_POOL_RECYCLE,
+                "pool_timeout": self.DB_POOL_TIMEOUT,
+                "pool_pre_ping": self.DB_POOL_PRE_PING,
+            }
+
 
 settings = Settings()
