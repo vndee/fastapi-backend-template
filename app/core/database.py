@@ -35,10 +35,7 @@ def _get_engine_config() -> dict[str, Any]:
                 **pool_config,
                 "connect_args": {
                     "connect_timeout": settings.DB_CONNECT_TIMEOUT,
-                    "server_settings": {
-                        "application_name": settings.APP_NAME,
-                        "jit": "off",  # Disable JIT for simple queries
-                    },
+                    "application_name": settings.APP_NAME,
                 },
             }
         )

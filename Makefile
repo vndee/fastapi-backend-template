@@ -109,7 +109,7 @@ celery-flower:
 	uv run celery -A app.core.celery_config flower --port=5555
 
 celery-worker-dummy:
-	uv run celery -A app.core.celery_config worker -l info -Q fastapi-backend-template -n dummy@%h
+	uv run celery -A app.core.celery_config worker -l info -Q fastapi-backend-template -n dummy@%h --pool=solo
 
 celery-monitor:
 	@echo "Active tasks:"
