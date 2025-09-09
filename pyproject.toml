@@ -28,3 +28,10 @@ dependencies = [
 
 [dependency-groups]
 dev = ["mypy>=1.17.1", "pre-commit>=4.3.0", "ruff>=0.12.12"]
+docs = [
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.5.0",
+    "mkdocs-awesome-pages-plugin>=2.9.2",
+    "mkdocs-git-revision-date-localized-plugin>=1.2.6",
+    "mkdocstrings[python]>=0.25.2",
+]

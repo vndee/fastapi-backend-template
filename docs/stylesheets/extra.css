@@ -1,0 +1,113 @@
+/* Custom styles for FastAPI Backend Template documentation */
+
+/* Code block enhancements */
+.highlight .filename {
+    background: var(--md-code-bg-color);
+    color: var(--md-code-fg-color);
+    font-size: 0.8em;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    border-radius: 0.2rem 0.2rem 0 0;
+    font-family: var(--md-code-font-family);
+}
+
+/* API method badges */
+.api-method {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.2rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+    color: white;
+}
+
+.api-method.get { background: #61affe; }
+.api-method.post { background: #49cc90; }
+.api-method.put { background: #fca130; }
+.api-method.delete { background: #f93e3e; }
+.api-method.patch { background: #50e3c2; }
+
+/* Status code badges */
+.status-code {
+    display: inline-block;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    font-family: var(--md-code-font-family);
+}
+
+.status-code.success { background: #d4edda; color: #155724; }
+.status-code.error { background: #f8d7da; color: #721c24; }
+.status-code.warning { background: #fff3cd; color: #856404; }
+
+/* Architecture diagram styling */
+.mermaid {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+/* Feature grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.feature-card {
+    padding: 1.5rem;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0.5rem;
+    background: var(--md-default-bg-color);
+}
+
+.feature-card h3 {
+    margin-top: 0;
+    color: var(--md-primary-fg-color);
+}
+
+/* Command examples */
+.command-example {
+    background: var(--md-code-bg-color);
+    border-left: 4px solid var(--md-primary-fg-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 0.2rem 0.2rem 0;
+}
+
+/* Environment indicators */
+.env-indicator {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.env-indicator.development { background: #e3f2fd; color: #1565c0; }
+.env-indicator.staging { background: #fff3e0; color: #ef6c00; }
+.env-indicator.production { background: #ffebee; color: #c62828; }
+
+/* Table improvements */
+.md-typeset table:not([class]) th {
+    background: var(--md-primary-fg-color--light);
+    color: var(--md-primary-bg-color);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .api-method {
+        display: block;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        width: fit-content;
+    }
+}

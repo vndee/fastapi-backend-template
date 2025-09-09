@@ -1,4 +1,4 @@
-.PHONY: help install dev-install run dev test lint format type-check clean build docker-build docker-run celery-worker celery-beat celery-flower
+.PHONY: help install dev-install run dev test lint format type-check clean build docker-build docker-run celery-worker celery-beat celery-flower docs-serve docs-build docs-install
 
 # Default target
 help:
@@ -21,6 +21,9 @@ help:
 	@echo "  celery-flower - Start Flower monitoring UI"
 	@echo "  celery-monitor - Show active/scheduled tasks and worker stats"
 	@echo "  celery-purge - Purge all tasks from queues"
+	@echo "  docs-install - Install documentation dependencies"
+	@echo "  docs-serve  - Serve documentation locally for development"
+	@echo "  docs-build  - Build documentation for production"
 
 
 # Installation
@@ -121,3 +124,13 @@ celery-monitor:
 
 celery-purge:
 	uv run celery -A app.core.celery_config purge
+
+# Documentation
+docs-install:
+	uv sync --group docs
+
+docs-serve:
+	uv run mkdocs serve
+
+docs-build:
+	uv run mkdocs build
