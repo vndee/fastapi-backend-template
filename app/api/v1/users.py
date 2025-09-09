@@ -1,6 +1,7 @@
 import uuid
+from typing import Annotated
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Body, Depends, Path, Query, status
 
 from app.core.codes import ResponseCode
 from app.core.exceptions import APIException
@@ -25,9 +26,9 @@ router = APIRouter(prefix="/users", tags=["users"])
 
 @router.post("", response_model=UserResponseSchema, status_code=status.HTTP_201_CREATED)
 async def create_user(
-    user_data: UserCreateSchema,
-    user_service: UserService = Depends(get_user_service),
-    current_user: CurrentUserSchema = Depends(get_current_superuser),
+    user_service: Annotated[UserService, Depends(get_user_service)],
+    user_data: Annotated[UserCreateSchema, Body(embed=True)],
+    current_user: Annotated[CurrentUserSchema, Depends(get_current_superuser)],
 ):
     """
     Create a new user.
@@ -38,9 +39,9 @@ async def create_user(
 
 @router.get("", status_code=status.HTTP_200_OK)
 async def get_users(
-    pagination: PaginationRequestSchema = Query(...),
-    user_service: UserService = Depends(get_user_service),
-    _: CurrentUserSchema = Depends(get_current_superuser),
+    pagination: Annotated[PaginationRequestSchema, Query(embed=True)],
+    user_service: Annotated[UserService, Depends(get_user_service)],
+    _: Annotated[CurrentUserSchema, Depends(get_current_superuser)],
 ) -> PaginatedResponseSchema[UserResponseSchema]:
     """
     Get list of users with pagination and filtering.
@@ -61,9 +62,9 @@ async def get_users(
 
 @router.get("/{user_id}", status_code=status.HTTP_200_OK)
 async def get_user_by_id(
-    user_id: uuid.UUID,
-    user_service: UserService = Depends(get_user_service),
-    _: CurrentUserSchema = Depends(get_current_superuser),
+    user_id: Annotated[uuid.UUID, Path],
+    user_service: Annotated[UserService, Depends(get_user_service)],
+    _: Annotated[CurrentUserSchema, Depends(get_current_superuser)],
 ) -> UserResponseSchema:
     """
     Get a user by ID.
@@ -81,10 +82,10 @@ async def get_user_by_id(
 
 @router.put("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def update_user(
-    user_id: uuid.UUID,
-    user_data: UserUpdateSchema,
-    user_service: UserService = Depends(get_user_service),
-    current_user: CurrentUserSchema = Depends(get_current_superuser),
+    user_id: Annotated[uuid.UUID, Path],
+    user_data: Annotated[UserUpdateSchema, Body(embed=True)],
+    user_service: Annotated[UserService, Depends(get_user_service)],
+    current_user: Annotated[CurrentUserSchema, Depends(get_current_superuser)],
 ) -> None:
     """
     Update a user by ID.
@@ -103,9 +104,9 @@ async def update_user(
 
 @router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_user(
-    user_id: uuid.UUID,
-    user_service: UserService = Depends(get_user_service),
-    current_user: CurrentUserSchema = Depends(get_current_superuser),
+    user_id: Annotated[uuid.UUID, Path],
+    user_service: Annotated[UserService, Depends(get_user_service)],
+    current_user: Annotated[CurrentUserSchema, Depends(get_current_superuser)],
 ) -> None:
     """
     Delete a user by ID (soft delete).

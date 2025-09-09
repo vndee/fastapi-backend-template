@@ -1,4 +1,6 @@
-from fastapi import APIRouter
+from typing import Annotated
+
+from fastapi import APIRouter, Path
 
 from app.schemas.task import TaskStatusResponseSchema, TaskTriggerResponseSchema
 from app.tasks.dummy import dummy_task, dummy_task_with_tracer
@@ -21,7 +23,7 @@ async def trigger_dummy_task_with_tracer() -> TaskTriggerResponseSchema:
 
 
 @router.get("/status/{task_id}")
-async def get_task_status(task_id: str) -> TaskStatusResponseSchema:
+async def get_task_status(task_id: Annotated[str, Path]) -> TaskStatusResponseSchema:
     """Get the status of a task"""
     from app.core.celery_config import celery_app
 

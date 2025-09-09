@@ -35,10 +35,10 @@ dev-install:
 
 # Running the application
 run:
-	fastapi run app/cmd/main.py
+	uv run fastapi run app/cmd/main.py
 
 dev:
-	fastapi dev app/cmd/main.py
+	uv run fastapi dev app/cmd/main.py
 
 # Testing
 test:

@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends, status
+from typing import Annotated
+
+from fastapi import APIRouter, Body, Depends, status
 
 from app.core.codes import ResponseCode
 from app.core.exceptions import APIException
@@ -30,8 +32,8 @@ router = APIRouter(prefix="/auth", tags=["authentication"])
 
 @router.post("/register", status_code=status.HTTP_201_CREATED)
 async def register(
-    user_data: UserCreateSchema,
-    user_service: UserService = Depends(get_user_service),
+    user_data: Annotated[UserCreateSchema, Body(embed=True)],
+    user_service: Annotated[UserService, Depends(get_user_service)],
 ) -> UserResponseSchema:
     """
     Register a new user account.
@@ -42,8 +44,8 @@ async def register(
 
 @router.post("/login")
 async def login(
-    login_data: LoginSchema,
-    auth_service: AuthService = Depends(get_auth_service),
+    login_data: Annotated[LoginSchema, Body(embed=True)],
+    auth_service: Annotated[AuthService, Depends(get_auth_service)],
 ) -> LoginResponseSchema:
     """
     Authenticate user and return access/refresh tokens.
@@ -53,8 +55,8 @@ async def login(
 
 @router.post("/refresh")
 async def refresh_token(
-    refresh_data: TokenRefreshSchema,
-    auth_service: AuthService = Depends(get_auth_service),
+    refresh_data: Annotated[TokenRefreshSchema, Body(embed=True)],
+    auth_service: Annotated[AuthService, Depends(get_auth_service)],
 ) -> TokenResponseSchema:
     """
     Refresh access token using refresh token.
@@ -64,8 +66,8 @@ async def refresh_token(
 
 @router.post("/logout")
 async def logout(
-    current_user: CurrentUserSchema = Depends(get_current_active_user),
-    auth_service: AuthService = Depends(get_auth_service),
+    current_user: Annotated[CurrentUserSchema, Depends(get_current_active_user)],
+    auth_service: Annotated[AuthService, Depends(get_auth_service)],
 ) -> LogoutResponseSchema:
     """
     Logout current user.
@@ -77,7 +79,7 @@ async def logout(
 
 @router.get("/me")
 async def get_current_user(
-    current_user: CurrentUserSchema = Depends(get_current_active_user),
+    current_user: Annotated[CurrentUserSchema, Depends(get_current_active_user)],
 ) -> CurrentUserSchema:
     """
     Get current authenticated user information.
@@ -87,7 +89,7 @@ async def get_current_user(
 
 @router.get("/status")
 async def auth_status(
-    current_user: CurrentUserSchema = Depends(get_current_active_user),
+    current_user: Annotated[CurrentUserSchema, Depends(get_current_active_user)],
 ) -> AuthStatusSchema:
     """
     Check authentication status.
@@ -101,9 +103,9 @@ async def auth_status(
 
 @router.post("/change-password")
 async def change_current_user_password(
-    password_data: PasswordChangeSchema,
-    current_user: CurrentUserSchema = Depends(get_current_active_user),
-    user_service: UserService = Depends(get_user_service),
+    password_data: Annotated[PasswordChangeSchema, Body(embed=True)],
+    current_user: Annotated[CurrentUserSchema, Depends(get_current_active_user)],
+    user_service: Annotated[UserService, Depends(get_user_service)],
 ) -> SuccessResponseSchema:
     """
     Change current user's password.
