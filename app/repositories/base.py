@@ -1,7 +1,7 @@
 import uuid
 from typing import Any, Dict, Generic, List, Optional, Tuple, Type, TypeVar
 
-from sqlalchemy import func
+from sqlalchemy import func, or_
 from sqlalchemy.orm import Session
 
 from app.core.logger import get_logger
@@ -39,14 +39,18 @@ class BaseRepository(Generic[ModelType]):
                     query = query.filter(getattr(self.model, key) == value)
 
         if search:
+            conditions = []
             for key, value in search.items():
                 if hasattr(self.model, key) and value is not None:
                     column = getattr(self.model, key)
                     like_pattern = f"%{value}%"
                     # Case-insensitive and accent-insensitive search using unaccent + ILIKE
-                    query = query.filter(
+                    conditions.append(
                         func.unaccent(column).ilike(func.unaccent(like_pattern))
                     )
+
+            if conditions:
+                query = query.filter(or_(*conditions))
 
         if count:
             total = query.count()
