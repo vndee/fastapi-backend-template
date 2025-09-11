@@ -450,7 +450,7 @@ requires-dist = [
     { name = "pydantic", specifier = ">=2.11.7" },
     { name = "pydantic-settings", specifier = ">=2.10.1" },
     { name = "pyjwt", specifier = ">=2.10.1" },
-    { name = "redis-data-structures", specifier = ">=0.1.26" },
+    { name = "redis-data-structures", specifier = ">=0.1.28" },
     { name = "sqlalchemy", specifier = ">=2.0.43" },
 ]
 
@@ -1706,16 +1706,16 @@ wheels = [
 
 [[package]]
 name = "redis-data-structures"
-version = "0.1.26"
+version = "0.1.28"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "backoff" },
     { name = "pyyaml" },
     { name = "redis" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6a/36/8b95739d996b31f835e6027cbcf2a79cb66ec7fb6d654fded2f4e8b13f00/redis_data_structures-0.1.26.tar.gz", hash = "sha256:09d06136bd38369536cf0dc85756dba708f2265bad56676b5288c91d783b95e8", size = 5845422 }
+sdist = { url = "https://files.pythonhosted.org/packages/71/a7/723333b5cb9b6c5d9056e27a18ed37d2dbd83b5c2c60ac3cbc94da07522d/redis_data_structures-0.1.28.tar.gz", hash = "sha256:e691f6cbfcd5015f4fa1c8155c6cba2d73754ffadfe3cb9f385494860a90a864", size = 5844535 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/21/c9/e937dbfb86ddf717dd01d71497b8913d0510f7e1a0dd36f49c47ffb69e2a/redis_data_structures-0.1.26-py3-none-any.whl", hash = "sha256:ec55e66c6d5e13dcd8a686b8ac1d27cdce0b4b6179c4aacc3b1d69acfb9dce58", size = 34806 },
+    { url = "https://files.pythonhosted.org/packages/8c/f6/34c58e9f47ed6e7da5658e907ca39464edb0a135f044001a67801ecd8a82/redis_data_structures-0.1.28-py3-none-any.whl", hash = "sha256:01a696580ab596f44c963c5f7476a09911b1116c8b7a8e25334f19d28d1aba33", size = 34967 },
 ]
 
 [[package]]

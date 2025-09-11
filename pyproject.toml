@@ -22,7 +22,7 @@ dependencies = [
     "pydantic>=2.11.7",
     "pydantic-settings>=2.10.1",
     "pyjwt>=2.10.1",
-    "redis-data-structures>=0.1.26",
+    "redis-data-structures>=0.1.28",
     "sqlalchemy>=2.0.43",
 ]
 
